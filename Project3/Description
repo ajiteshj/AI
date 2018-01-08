@@ -1,0 +1,76 @@
+Decision Networks :
+
+
+You will be given a decision network, which may have several decision nodes, several chance nodes, and at most one utility node. You will be asked to answer queries using the given network:
+1) Calculate a specific joint, marginal, or conditional probability. (~50%)
+2) Calculate the expected utility of a particular decision, or determine the decision with the maximum expected utility. (~50%)
+
+
+Sample Input:
+
+(sample01.txt)
+P(N = +, I = -)
+P(D = + | L = +, I = +)
+******
+L
+0.4
+***
+N | L
+0.8 +
+0.3 -
+***
+I
+0.5
+***
+D | N I
+0.3 + +
+0.6 + -
+0.95 - +
+0.05 - - 
+
+
+Input
+Each line before the “******” will contain a single query. The query can have three forms, signaled by the function name beginning the query:
+1) Queries beginning with “P” are asking for a specific joint, marginal, or conditional probability. Any decision node in the network will appear as evidence in the query:
+e.g. 	P(N = +, I = -)
+P(D = + | L = +, I = +)
+2) Queries beginning with “EU” are asking for expected utility over one or more decision nodes, conditioned on the given observed evidence:
+	e.g. 	EU(I = +)
+EU(I = + | L = +)
+EU(L = -, I = +)
+3) Queries beginning with “MEU” are asking for maximum expected utility over one or more decision nodes, conditioned on the given observed evidence:
+	e.g. 	MEU(I)
+MEU(I | L = +)
+MEU(L, I)
+The line after all queries will have six “*” as the separator. 
+The lines following the separator represent the Bayesian or decision network by showing the tables of probabilities / conditional probabilities for each node. Each tables is separated by a line with three asterisks (“***”), and will have the following format:
+e.g.	D | N I
+0.3 + +
+0.6 + -
+0.9 - +
+0.05 - -
+The first line contains the node’s name. If the node has any parents, its name will be followed by a “|” and then the names of its parents (all separated by spaces).
+All node names begin with an uppercase letter and contain only letters. You can assume that each name has at most 20 letters.
+The remaining lines specify the probabilities that the child node is True, over all combinations of values of its parent nodes. The probability that the child node is False is simply 1−the given probability that it is True.
+All nodes can have only two values, “+” (True) or “−” (False).
+The probability will range from 0 to 1.
+The parent node values follow the order in which they appear in the first line.
+However, with the exception of the first line, there is no specific order between lines of the table (e.g. “+ -” may appear after “- +”, or the other way around).
+When a node has no parent, then there is only a single number (probability of True):
+e.g.	L
+0.4
+Every node has a corresponding table in the input file, so you can know the network structure from the first line of each table. For example, your program could figure out the network structure in sample01.txt based on solely the following information:
+	L
+	N | L
+	I
+D | N I
+There will not be any directed cycles in the given networks.
+Parent nodes always have their tables appearing before the child node.
+A decision node will not have a parent node or a probability table; there will be only the word “decision” (non-capitalized) on the second line to mark it as a decision node.
+It is possible for there to be multiple decision nodes. For example, “L” might be made a decision node as well in sample01.txt. You may assume there are at most 3 decision nodes.
+When asking for probability in a query, the values of all decision nodes will be given as conditions.
+With at least one decision node in the network, there will always be a utility node as well, and its utility table will be given at the end of the input file, separated from others by six “*” (see sample02.txt for an example).
+The format of a utility table is similar to that of a normal node with parent. The first line begins with the word “utility” (non-capitalized), followed by a “|” sign, then followed by its parent nodes.
+The remaining lines show the utility value over all combinations of parent node values.
+Every utility value is an integer, possibly negative.
+There will be at most one utility node. If there is a utility node, it will have no more than 3 parent nodes.
