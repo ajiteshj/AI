@@ -1,0 +1,22 @@
+Project-2 : Adversarial Search
+
+Introduction :
+
+In this project, you will write a program to determine the minimax value for given
+positions of the Reversi game, using the Alpha-Beta pruning algorithm with positional
+weight evaluation functions.
+
+
+File Formats
+Input format:
+<player to move>
+<search cut-off depth>
+<current board status>
+where the board status is denoted by * as blank cell, X as black piece, and O as white piece.
+
+
+Output format:
+<next state>
+<traverse log>
+where the traverse log requires 5 columns. Each column is separated by “,”. The five
+columns are node, depth, minimax value, alpha, beta.
